@@ -1,0 +1,36 @@
+<h1>Add your details {{childName}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="detailsForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="name" />
+    </mat-form-field>
+
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input formControlName="address" matInput placeholder="address" />
+    </mat-form-field>
+
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input formControlName="district" matInput placeholder="district" />
+    </mat-form-field>
+    <br/>
+    <mat-form-field appearance="fill">
+      <mat-label>Slots</mat-label>
+      <mat-select>
+        <mat-option *ngFor = "let i of" >
+          {{i}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close="">Cancel</button
+  >&nbsp;
+  <button mat-raised-button color="primary">Add</button>
+</div>
+

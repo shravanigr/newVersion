@@ -1,0 +1,104 @@
+<!-- <p>
+    <mat-toolbar color="primary">
+      <span class="fill">Table</span>
+    </mat-toolbar>
+</p> -->
+
+<mat-card>
+    <mat-form-field>
+      <!-- <mat-label>Search</mat-label> -->
+      <mat-icon matSuffix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Search anything" autocomplete="off" #input>
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="center_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Center Id</th>
+          <td mat-cell *matCellDef="let row"> {{row.center_id}} </td>
+        </ng-container>
+    
+       
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Address</th>
+          <td mat-cell *matCellDef="let row"> {{row.address}} </td>
+        </ng-container>
+    
+     
+        <ng-container matColumnDef="state_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> state_name</th>
+          <td mat-cell *matCellDef="let row"> {{row.state_name}} </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef="district_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> district_name</th>
+          <td mat-cell *matCellDef="let row"> {{row.district_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
+          <td mat-cell *matCellDef="let row">
+            <a  [routerLink]="['/session', row.center_id]"><button mat-icon-button color="accent" >
+              <mat-icon>info</mat-icon>
+            </button></a>
+          </td>
+        </ng-container>
+
+         
+       
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator
+       [pageSizeOptions]="[ 10, 25, 50, 100]"
+       #paginatorRef
+        aria-label="Select page of users">
+    </mat-paginator>
+    </div>
+ <br>
+    <button class="m-2" mat-raised-button color="primary" (click)="deleteSelectedRow()">Delete</button>
+
+</mat-card>
+
+
+
+
+  
+        
+
+    
+  
+  
